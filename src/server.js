@@ -25,4 +25,19 @@ io.on('connection', socket => {
       console.log(`Remaining sockets: ${sockets.size}`);
   });
 
+  function startTimer() {
+      timerId = setInterval(() => {
+          if (!sockets.size) {
+              clearInterval(timerId);
+              timerId = null;
+              console.log(`Timer stopped`);
+          }
+          updateData();
+          for (const s of sockets) {
+              s.emit('data', { data: localdata });
+          }
+
+      }, 10);
+  }
+
 });

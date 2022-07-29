@@ -5,3 +5,5 @@ io = require('socket.io')(server);
 let timerId = null,
     sockets = new Set();
 var tradedata = require('./data');
+
+app.use(express.static(__dirname + '/dist'));
